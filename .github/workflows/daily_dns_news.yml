@@ -2,7 +2,7 @@ name: Daily News
 
 on:
   schedule:
-    - cron: '0 8 * * *' # Runs at 8:00 AM UTC every day.
+    - cron: '0 11 * * *' # Runs at 8:00 AM UTC every day.
   workflow_dispatch: # Allows manual triggering from the Actions tab in GitHub
 
 jobs:
