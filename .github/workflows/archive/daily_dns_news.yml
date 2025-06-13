@@ -1,0 +1,23 @@
+name: Daily News
+
+on:
+  schedule:
+    - cron: '0 11 * * *' # Runs at 11:00 AM UTC every day.
+  workflow_dispatch: # Allows manual triggering from the Actions tab in GitHub
+
+jobs:
+  fetch_filter_and_notify_go:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v5
+
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Fetch RSS, filter DNS entries, and send to Slack (Go)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          RSS_FEED_URL: "https://domainincite.com/feed"
+        run: |
+          go run main.go
